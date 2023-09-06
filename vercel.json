@@ -1,8 +1,14 @@
 {
   "rewrites": [
     {
-      "source": "/wang-blog/:splat*",
-      "destination": "/wang-blog/index.html"
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "wangblog.vercel.app"
+        }
+      ],
+      "destination": "/wang-blog/:path*"
     }
   ]
 }
