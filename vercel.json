@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/wang-blog/:splat*",
+      "destination": "/wang-blog/index.html"
+    }
+  ]
+}
