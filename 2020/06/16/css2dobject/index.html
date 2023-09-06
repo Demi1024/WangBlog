@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Three.JS创建中文的几种方式 | Demi Wang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="导语： 在进行3D开发时，常常需要给物体加些中文文字进行提示。由于Three.JS不自带对中文字体的支持，在开发中碰壁无数。在经历了多次的探索和实践后，总结了几种常用到的中文字体加载方式，并对比优缺点。 首先，先给出官网的创建文字的地址，有需要的同学可以前去学习。Three.JS官网 （一）加载字体纹理此方法采用的是，先将需要添加的文字在画布（Canvas）中绘制出来，然后转换成纹理（Textur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Three.JS创建中文的几种方式">
+<meta property="og:url" content="https://demi1024.github.io/WangBlog/2020/06/16/css2dobject/index.html">
+<meta property="og:site_name" content="Demi Wang">
+<meta property="og:description" content="导语： 在进行3D开发时，常常需要给物体加些中文文字进行提示。由于Three.JS不自带对中文字体的支持，在开发中碰壁无数。在经历了多次的探索和实践后，总结了几种常用到的中文字体加载方式，并对比优缺点。 首先，先给出官网的创建文字的地址，有需要的同学可以前去学习。Three.JS官网 （一）加载字体纹理此方法采用的是，先将需要添加的文字在画布（Canvas）中绘制出来，然后转换成纹理（Textur">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/0063Qlsmgy1ggbou6uga8j30jj0h0jtj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/0063Qlsmgy1ggbowh29p1j30oe0evwgd.jpg">
+<meta property="article:published_time" content="2020-06-16T21:59:18.000Z">
+<meta property="article:modified_time" content="2023-09-06T10:30:52.335Z">
+<meta property="article:author" content="Demi Wang">
+<meta property="article:tag" content="CSS2DObject">
+<meta property="article:tag" content="TextLoader">
+<meta property="article:tag" content="Sprite">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/0063Qlsmgy1ggbou6uga8j30jj0h0jtj.jpg">
+  
+    <link rel="alternate" href="https://github.com/Demi1024" title="Demi Wang" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/WangBlog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/WangBlog/" id="logo">Demi Wang</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/WangBlog/">首页</a>
+        
+          <a class="main-nav-link" href="/WangBlog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="https://github.com/Demi1024" target="_blank" rel="noopener" title="订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://demi1024.github.io/WangBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css2dobject" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/WangBlog/2020/06/16/css2dobject/" class="article-date">
+  <time datetime="2020-06-16T21:59:18.000Z" itemprop="datePublished">2020-06-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/WangBlog/categories/Three-js/">Three.js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Three.JS创建中文的几种方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>导语：</strong> 在进行3D开发时，常常需要给物体加些中文文字进行提示。由于Three.JS不自带对中文字体的支持，在开发中碰壁无数。在经历了多次的探索和实践后，总结了几种常用到的中文字体加载方式，并对比优缺点。</p>
+<p>首先，先给出官网的创建文字的地址，有需要的同学可以前去学习。<a href="https://threejs.org/docs/index.html#manual/zh/introduction/Creating-text" target="_blank" rel="noopener">Three.JS官网</a></p>
+<h2 id="（一）加载字体纹理"><a href="#（一）加载字体纹理" class="headerlink" title="（一）加载字体纹理"></a>（一）加载字体纹理</h2><p>此方法采用的是，先将需要添加的文字在画布（Canvas）中绘制出来，然后转换成纹理（Texture），最后应用于精灵（Sprite）中。</p>
+<p>效果如图所示</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/0063Qlsmgy1ggbou6uga8j30jj0h0jtj.jpg" alt="通过纹理方式加载文字"></p>
+<p>话不多说直接上代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 生成添加文字的贴面材质</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeTextTexture</span>(<span class="params">message, color,backgroundColor = &#123; r:<span class="number">255</span>, g:<span class="number">255</span>, b:<span class="number">255</span>, a:<span class="number">1.0</span> &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* 创建画布 */</span></span><br><span class="line">  <span class="keyword">let</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">let</span> context = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="comment">/* 设置画布大小 */</span></span><br><span class="line">  canvas.width = <span class="number">650</span>;</span><br><span class="line">  canvas.height = <span class="number">300</span>;</span><br><span class="line">  <span class="comment">/* 背景颜色 */</span></span><br><span class="line">  context.fillStyle   = <span class="string">"rgba("</span> + backgroundColor.r + <span class="string">","</span> + backgroundColor.g + <span class="string">","</span></span><br><span class="line">      + backgroundColor.b + <span class="string">","</span> + backgroundColor.a + <span class="string">")"</span>;</span><br><span class="line">  <span class="comment">/* 支持多行文字 */</span></span><br><span class="line">  <span class="keyword">let</span> chr = message.split(<span class="string">"\n"</span>);</span><br><span class="line">  <span class="keyword">let</span> temp = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">let</span> row = [];</span><br><span class="line"></span><br><span class="line">  context.font = <span class="string">"56px Arial"</span>;</span><br><span class="line">  <span class="comment">// 水平对齐</span></span><br><span class="line">  context.textAlign = <span class="string">'left '</span>;</span><br><span class="line">  <span class="comment">// 垂直对齐</span></span><br><span class="line">  context.textBaseline = <span class="string">"middle"</span>;</span><br><span class="line">  <span class="comment">/* 字体颜色 */</span></span><br><span class="line">  context.fillStyle = color;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">0</span>; a &lt; chr.length; a++) &#123;</span><br><span class="line">    row.push(temp);</span><br><span class="line">    temp = <span class="string">""</span>;</span><br><span class="line">    temp += chr[a];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  row.push(temp);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> b = <span class="number">0</span>; b &lt; row.length; b++) &#123;</span><br><span class="line">    <span class="keyword">let</span> fontNum = row[b].length</span><br><span class="line">    context.fillText(row[b], <span class="number">30</span>, <span class="number">0</span> + b * <span class="number">80</span>, fontNum * <span class="number">80</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* 画布内容用于纹理贴图 */</span></span><br><span class="line">  <span class="keyword">let</span> texture = <span class="keyword">new</span> THREE.Texture(canvas);</span><br><span class="line">  texture.needsUpdate = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> texture</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeTextSprite</span>(<span class="params">textName, message, color, textPosX, textPosY, textPosZ</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> texture = makeTextTexture(message, color)</span><br><span class="line">  <span class="keyword">let</span> spriteMaterial = <span class="keyword">new</span> THREE.SpriteMaterial(&#123;</span><br><span class="line">    map: texture,</span><br><span class="line">    transparent: <span class="literal">true</span>,</span><br><span class="line">    opacity: <span class="number">0.9</span>,</span><br><span class="line">    depthTest: <span class="literal">false</span>,</span><br><span class="line">    fog: <span class="literal">false</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">let</span> sprite = <span class="keyword">new</span> THREE.Sprite(spriteMaterial);</span><br><span class="line">  <span class="comment">/* 缩放比例 */</span></span><br><span class="line">  sprite.scale.set(<span class="number">60</span>, <span class="number">30</span>, <span class="number">60</span>);</span><br><span class="line">  sprite.position.set(textPosX, textPosY, textPosZ);</span><br><span class="line">  sprite.name = textName;</span><br><span class="line">  <span class="comment">// 向场景中添加文字</span></span><br><span class="line">  scene.add(sprite)；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）Three-JS自带的文字几何体"><a href="#（二）Three-JS自带的文字几何体" class="headerlink" title="（二）Three.JS自带的文字几何体"></a>（二）Three.JS自带的文字几何体</h2><p>使用Three.JS的TextGeometry，创建文字几何体。</p>
+<p>此方法需要预先加载字体库，之后在创建文字几何体时应用字体库。我这里加载了微软雅黑的字体文件（json格式）</p>
+<p>效果如图所示</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/0063Qlsmgy1ggbowh29p1j30oe0evwgd.jpg" alt="加载字体方式"></p>
+<p>代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fontRes = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 加载字体包Font</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadFont</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> fontLoader = <span class="keyword">new</span> THREE.FontLoader();</span><br><span class="line">  <span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">'development'</span>)&#123;</span><br><span class="line">    fontLoader.load(<span class="string">'/assets/Font/YaHei_Regular.json'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">      fontRes = response;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加载3D文字</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadText</span>(<span class="params">textName, content, posX, posY, posZ,fontCol=<span class="number">0xFFFFFF</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cMesh = <span class="literal">null</span></span><br><span class="line">  <span class="comment">// 创建3D 文字</span></span><br><span class="line">  <span class="keyword">let</span> textGeometry = <span class="keyword">new</span> THREE.TextGeometry( content , &#123;</span><br><span class="line">    font: fontRes,</span><br><span class="line">    size: <span class="number">15</span>,</span><br><span class="line">    height: <span class="number">1</span>,</span><br><span class="line">    curveSegments: <span class="number">4</span>,</span><br><span class="line">    bevelEnabled: <span class="literal">false</span>,</span><br><span class="line">  &#125; );</span><br><span class="line">  textGeometry.computeBoundingBox();</span><br><span class="line">  <span class="comment">//创建法向量材质</span></span><br><span class="line">  <span class="keyword">let</span> textMaterial = <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123;</span><br><span class="line">    color: fontCol,</span><br><span class="line">    transparent: <span class="literal">true</span>,</span><br><span class="line">    opacity: <span class="number">0.8</span></span><br><span class="line">  &#125;);</span><br><span class="line">  cMesh = <span class="keyword">new</span> THREE.Mesh(textGeometry, textMaterial);</span><br><span class="line">  cMesh.position.set(posX, posY, posZ);</span><br><span class="line">  cMesh.name = textName;</span><br><span class="line">  scene.add(cMesh);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通常一个完整的字体json文件，体积都比较大。如果只用到极少的字体，去加载一个完整的字体文件是不划算的。推荐通过精简字体文件，提取包含使用文字的文件，通过减小字体文件的体积来优化加载速度</p>
+<h2 id="（三）CSS2Dobject-加载文字"><a href="#（三）CSS2Dobject-加载文字" class="headerlink" title="（三）CSS2Dobject 加载文字"></a>（三）CSS2Dobject 加载文字</h2><p>我们都知道通过css控制dom元素是非常方便的，那么怎么在Three.js中也实现这种加载方式呢？</p>
+<p>通过查阅Three.js项目示例我找到了灵感。<a href="https://github.com/mrdoob/three.js/tree/dev/examples" target="_blank" rel="noopener">例子参阅</a> 在<code>css2d_label.html</code>这个文件中我看到文字吸附于模型的示例</p>
+<p>原理是创建一个</p>
+<p>下面来看段代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World!'</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://demi1024.github.io/WangBlog/2020/06/16/css2dobject/" data-id="clm7lmy7y0000dhom34ir7650" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/WangBlog/tags/CSS2DObject/" rel="tag">CSS2DObject</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/WangBlog/tags/Sprite/" rel="tag">Sprite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/WangBlog/tags/TextLoader/" rel="tag">TextLoader</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/WangBlog/2020/06/21/loadGlb/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Three.js加载外部模型
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/WangBlog/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/WangBlog/categories/Three-js/">Three.js</a></li><li class="category-list-item"><a class="category-list-link" href="/WangBlog/categories/Vue%E9%80%A0%E8%BD%AE%E5%AD%90/">Vue造轮子</a></li><li class="category-list-item"><a class="category-list-link" href="/WangBlog/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/CSS2DObject/" rel="tag">CSS2DObject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/Node-JS/" rel="tag">Node.JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/Sprite/" rel="tag">Sprite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/TextLoader/" rel="tag">TextLoader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/WangBlog/tags/Vue3/" rel="tag">Vue3</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/WangBlog/tags/CSS2DObject/" style="font-size: 10px;">CSS2DObject</a> <a href="/WangBlog/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/WangBlog/tags/Node-JS/" style="font-size: 10px;">Node.JS</a> <a href="/WangBlog/tags/React/" style="font-size: 20px;">React</a> <a href="/WangBlog/tags/Sprite/" style="font-size: 10px;">Sprite</a> <a href="/WangBlog/tags/TextLoader/" style="font-size: 20px;">TextLoader</a> <a href="/WangBlog/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/WangBlog/tags/Vue3/" style="font-size: 10px;">Vue3</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/WangBlog/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/WangBlog/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/WangBlog/archives/2020/06/">六月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/WangBlog/2020/08/06/dayQue-arrayAndString/">【每日一题】字符串的处理</a>
+          </li>
+        
+          <li>
+            <a href="/WangBlog/2020/07/29/vue3-configTS/">VUE3.0 造轮子之-项目TypeScript配置</a>
+          </li>
+        
+          <li>
+            <a href="/WangBlog/2020/07/24/dayQue-EventLoop/">【每日一题】Event Loop</a>
+          </li>
+        
+          <li>
+            <a href="/WangBlog/2020/07/10/react-createProject/">创建自己的react项目</a>
+          </li>
+        
+          <li>
+            <a href="/WangBlog/2020/07/06/react-State/">深入理解React的setState</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Demi Wang<br>
+      技术支持 <a href="http://hexo.io/" target="_blank">Hexo</a>
+      <br>
+      <p>联系我：demi1024w@126.com</p>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/WangBlog/" class="mobile-nav-link">home</a>
+  
+    <a href="/WangBlog/archives" class="mobile-nav-link">archives</a>
+  
+</nav>
+    
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js "></script>
+
+
+
+  
+<link rel="stylesheet" href="/WangBlog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/WangBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/WangBlog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
